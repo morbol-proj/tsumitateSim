@@ -17,22 +17,22 @@
                 <div class="input-grid">
                     <div class="input-group">
                         <label for="initialAmount">初期投資 (万円)</label>
-                        <input type="number" id="initialAmount" value="100" min="0" step="1">
+                        <input type="number" id="initialAmount" value="100.0" min="0" step="1">
                     </div>
                     
                     <div class="input-group">
                         <label for="monthlyAmount">積み立て (万円/月)</label>
-                        <input type="number" id="monthlyAmount" value="10" min="0" step="0.1">
+                        <input type="number" id="monthlyAmount" value="10.0" min="0" step="1">
                     </div>
                     
                     <div class="input-group">
                         <label for="annualRate">年利 (%)</label>
-                        <input type="number" id="annualRate" value="5.0" min="0" max="100" step="0.1">
+                        <input type="number" id="annualRate" value="5.0" min="0" max="50" step="0.1">
                     </div>
                     
                     <div class="input-group">
                         <label for="years">期間 (年)</label>
-                        <input type="number" id="years" value="20" min="1" max="50" step="1">
+                        <input type="number" id="years" value="20" min="1" max="100" step="1">
                     </div>
                 </div>
                 
@@ -52,7 +52,7 @@
                         <div class="amount" id="totalInvestment">¥0</div>
                     </div>
                     <div class="summary-card">
-                        <h3>運用益</h3>
+                        <h3>運用益合計</h3>
                         <div class="amount" id="totalProfit">¥0</div>
                     </div>
                     <div class="summary-card">
