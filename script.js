@@ -265,14 +265,14 @@ function validateInputs() {
     
     if (annualRate < 0) {
         annualRateInput.value = 0;
-    } else if (annualRate > 20) {
-        annualRateInput.value = 20;
+    } else if (annualRate > 50) {
+        annualRateInput.value = 50;
     }
     
     if (years < 1) {
         yearsInput.value = 1;
-    } else if (years > 50) {
-        yearsInput.value = 50;
+    } else if (years > 100) {
+        yearsInput.value = 100;
     }
 }
 
