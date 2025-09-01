@@ -213,11 +213,11 @@ function updateCalculationFormula(initialAmount, monthlyAmount, annualRate) {
                 <div class="formula-detail">
                     初期投資: ${initialAmount.toLocaleString()}円<br>
                     積み立て: ${monthlyAmount.toLocaleString()}円/月 × 12ヶ月 = ${(monthlyAmount * 12).toLocaleString()}円<br>
-                    年利率: ${annualRate}%<br><br>
+                    年利: ${annualRate}%<br><br>
                     
                     <strong>計算過程:</strong><br>
                     1. 積み立て後の金額: ${initialAmount.toLocaleString()} + ${(monthlyAmount * 12).toLocaleString()} = ${afterInvestment.toLocaleString()}円<br>
-                    2. 年利適用: ${afterInvestment.toLocaleString()} × (1 + ${annualRate}%) = ${afterInterest.toLocaleString()}円<br>
+                    2. 年利適用: ${afterInvestment.toLocaleString()} × (1 + ${annualRate} ÷ 100) = ${afterInterest.toLocaleString()}円<br>
                     3. 最終資産: ${afterInterest.toLocaleString()}円
                 </div>
             </div>
