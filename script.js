@@ -19,8 +19,14 @@ let calculationType = 'monthly';
 
 // 入力値の変更を監視
 [initialAmountInput, monthlyAmountInput, annualRateInput, yearsInput].forEach(input => {
-    input.addEventListener('input', calculateAndUpdate);
-    input.addEventListener('change', calculateAndUpdate);
+    input.addEventListener('input', () => {
+        calculateAndUpdate();
+        saveParametersToStorage();
+    });
+    input.addEventListener('change', () => {
+        calculateAndUpdate();
+        saveParametersToStorage();
+    });
 });
 
 // 計算方法の切り替えイベント
@@ -28,16 +34,66 @@ monthlyCompoundBtn.addEventListener('click', () => {
     calculationType = 'monthly';
     updateCalculationButtons();
     calculateAndUpdate();
+    saveParametersToStorage();
 });
 
 annualCompoundBtn.addEventListener('click', () => {
     calculationType = 'annual';
     updateCalculationButtons();
     calculateAndUpdate();
+    saveParametersToStorage();
 });
 
+// ローカルストレージのキー
+const STORAGE_KEY = 'tsumitateSim_params';
+
+// パラメータをローカルストレージに保存
+function saveParametersToStorage() {
+    const params = {
+        initialAmount: initialAmountInput.value,
+        monthlyAmount: monthlyAmountInput.value,
+        annualRate: annualRateInput.value,
+        years: yearsInput.value,
+        calculationType: calculationType
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+}
+
+// ローカルストレージからパラメータを読み込み
+function loadParametersFromStorage() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const params = JSON.parse(saved);
+            
+            // 入力フィールドに値を設定
+            if (params.initialAmount !== undefined) {
+                initialAmountInput.value = params.initialAmount;
+            }
+            if (params.monthlyAmount !== undefined) {
+                monthlyAmountInput.value = params.monthlyAmount;
+            }
+            if (params.annualRate !== undefined) {
+                annualRateInput.value = params.annualRate;
+            }
+            if (params.years !== undefined) {
+                yearsInput.value = params.years;
+            }
+            if (params.calculationType !== undefined) {
+                calculationType = params.calculationType;
+                updateCalculationButtons();
+            }
+        }
+    } catch (error) {
+        console.warn('ローカルストレージからのパラメータ読み込みに失敗しました:', error);
+    }
+}
+
 // 初期計算
-document.addEventListener('DOMContentLoaded', calculateAndUpdate);
+document.addEventListener('DOMContentLoaded', () => {
+    loadParametersFromStorage();
+    calculateAndUpdate();
+});
 
 // 積み立て計算と更新
 function calculateAndUpdate() {
